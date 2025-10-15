@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sự kiện | CLB Tin học THPT Bến Cát</title>
+  <!-- Cấu trúc dữ liệu cho Google -->
+  <meta itemprop="name" content="Câu lạc bộ Tin học THPT Bến Cát">
+  <meta itemprop="description" content="Nơi kết nối học sinh yêu thích công nghệ, lập trình và sáng tạo kỹ thuật số.">
+  <meta itemprop="image" content="assets/logo.png">
+
+  <!-- Favicon và biểu tượng -->
+  <link rel="icon" href="assets/logo.png" type="image/png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="bg-gray-900 sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center p-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <img src="assets/logo.png" alt="Logo CLB" class="w-10 h-10 rounded-full">
+        <span class="font-bold text-lg text-cyan-400">CLB Tin học THPT Bến Cát</span>
+      </div>
+
+      <!-- Nút menu di động -->
+      <button id="menu-btn" class="md:hidden text-cyan-400 focus:outline-none">
+        <!-- Icon dấu ba gạch -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" 
+            viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Menu -->
+      <ul id="menu" class="hidden md:flex gap-6 text-gray-300">
+        <li><a href="index.html" class="hover:text-cyan-400">Trang chủ</a></li>
+        <li><a href="about.html" class="hover:text-cyan-400">Giới thiệu</a></li>
+        <li><a href="projects.html" class="hover:text-cyan-400">Dự án</a></li>
+        <li><a href="events.html" class="hover:text-cyan-400">Sự kiện</a></li>
+        <li><a href="gallery.html" class="hover:text-cyan-400">Thư viện</a></li>
+        <li><a href="contact.html" class="hover:text-cyan-400">Liên hệ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Events -->
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-bold text-cyan-400 mb-8">Sự kiện sắp tới</h1>
+    <div class="space-y-6">
+      <div class="bg-gray-800 p-6 rounded-xl">
+        <h3 class="text-xl font-semibold text-cyan-300">Sinh hoạt Câu lạc bộ: Buổi 1</h3>
+        <p class="text-gray-400">Ngày: 16/11/2025</p>
+        <p class="text-gray-400 mt-2">- Lễ ra mắt Câu lạc bộ Tin học Trường THPT Bến Cát.</p>
+        <p class="text-gray-400 mt-2">- Giao lưu chủ đề "Công nghệ quanh ta".</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl">
+        <h3 class="text-xl font-semibold text-cyan-300">Sinh hoạt Câu lạc bộ: Buổi 2</h3>
+        <p class="text-gray-400">Ngày: 23/11/2025</p>
+        <p class="text-gray-400 mt-2">Workshop "Làm quen lập trình Python cơ bản".</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-6 text-center">
+    <p>&copy; <span id="year"></span> Câu lạc bộ Tin học THPT Bến Cát</p>
+    <p class="text-sm mt-2">Email: hsgbencat@gmail.com | Website: <!-- TODO --></p>
+  </footer>
+  <script>
+    document.getElementById('year').textContent=new Date().getFullYear();
+    const els=document.querySelectorAll('[data-animate]');
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+    els.forEach(el=>obs.observe(el));
+  </script>
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    // Bấm nút ba gạch để bật/tắt menu
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('flex');
+      menu.classList.toggle('flex-col');
+      menu.classList.toggle('absolute');
+      menu.classList.toggle('top-16');
+      menu.classList.toggle('left-0');
+      menu.classList.toggle('w-full');
+      menu.classList.toggle('bg-gray-900');
+      menu.classList.toggle('p-4');
+    });
+
+    // Bấm ra ngoài menu thì tự đóng
+    document.addEventListener('click', (e) => {
+      const isClickInsideMenu = menu.contains(e.target);
+      const isClickOnButton = menuBtn.contains(e.target);
+
+      if (!isClickInsideMenu && !isClickOnButton) {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex', 'flex-col', 'absolute', 'top-16', 'left-0', 'w-full', 'bg-gray-900', 'p-4');
+      }
+    });
+  </script>
+</body>
+</html>
